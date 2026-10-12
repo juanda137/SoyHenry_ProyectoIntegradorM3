@@ -1,0 +1,11 @@
+.env
+.venv/
+chroma_db/
+__pycache__/
+.pytest_cache/
+.ipynb_checkpoints/
+docs/
+.uv-cache/
+.tools/
+.ruff_cache/
+.superpowers/
