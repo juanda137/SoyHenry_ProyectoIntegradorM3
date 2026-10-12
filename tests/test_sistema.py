@@ -38,3 +38,17 @@ def test_fuera_de_dominio_responde_mensaje_fijo():
     assert salida["resultado"]["respuesta"] == MENSAJE_FUERA_DE_DOMINIO
     assert salida["resultado"]["departamento"] == "fuera_de_dominio"
     assert salida["resultado"]["fuentes"] == []
+
+
+def test_si_el_agente_falla_se_conserva_la_clasificacion():
+    def explotar(entrada):
+        raise RuntimeError("timeout de OpenAI")
+
+    agentes = {**AGENTES, "hr": RunnableLambda(explotar)}
+    config = cargar_config(usar_dotenv=False)
+    sistema = crear_sistema(config, orquestador=orquestador_fijo("hr"), agentes=agentes)
+    salida = sistema.invoke({"consulta": "vacaciones"})
+    assert salida["clasificacion"]["departamento"] == "hr"
+    assert salida["resultado"]["departamento"] == "hr"
+    assert salida["resultado"]["respuesta"] is None
+    assert "timeout de OpenAI" in salida["resultado"]["error"]

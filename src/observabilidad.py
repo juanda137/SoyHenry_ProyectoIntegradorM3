@@ -28,11 +28,22 @@ def obtener_cliente_langfuse(config):
             file=sys.stderr,
         )
         return None
-    return Langfuse(
+    cliente = Langfuse(
         public_key=config["langfuse_public_key"],
         secret_key=config["langfuse_secret_key"],
         host=config["langfuse_host"],
     )
+    # El SDK envía trazas y scores en segundo plano y no avisa si fallan.
+    # Por eso comprobamos una vez, al inicio, que el host responde y las claves sirven.
+    try:
+        conectado = cliente.auth_check()
+    except Exception as error:
+        print(f"[aviso] Langfuse no responde ({error}): se sigue sin trazas.", file=sys.stderr)
+        return None
+    if not conectado:
+        print("[aviso] Langfuse rechazó las claves: se sigue sin trazas.", file=sys.stderr)
+        return None
+    return cliente
 
 
 def crear_handler(config):

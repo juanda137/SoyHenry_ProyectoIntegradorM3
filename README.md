@@ -121,7 +121,7 @@ python -m src.multi_agent_system --evaluar-queries    # corre las 15 test querie
 python -m src.multi_agent_system "..." --model gpt-6-luna --k 6
 ```
 
-La respuesta es un JSON con `consulta`, `departamento`, `confianza`, `razon`, `respuesta`, `fuentes`, `error_clasificacion`, `trace_id` y `evaluacion`.
+La respuesta es un JSON con `consulta`, `departamento`, `confianza`, `razon`, `respuesta`, `fuentes`, `error_clasificacion`, `etapa_error` (`clasificacion`, `respuesta` o `null`), `error`, `respuesta_completada`, `trace_id` y `evaluacion`. Si el agente falla después de clasificar, la respuesta igual llega, con `respuesta: null` y el error, sin perder el departamento elegido.
 
 ## 7. Observabilidad con Langfuse
 
@@ -138,6 +138,14 @@ Cada traza lleva como **tag** el departamento elegido y como **metadata** la con
 
 Pendiente de la primera ejecución con claves reales (`python -m src.multi_agent_system --evaluar-queries`). Los resultados quedan en `outputs/resultados_test_queries.json`.
 
+Cómo se mide (para no mezclar errores técnicos con errores de routing):
+
+- **Clasificaciones válidas y cobertura**: consultas en las que el orquestador respondió sin error, sobre el total.
+- **Acierto de clasificación**: aciertos solo entre las clasificaciones válidas. Si el clasificador falla y la consulta cae en `fuera_de_dominio` por emergencia, **no** cuenta como acierto. Si la clasificación fue correcta pero falló la generación, el acierto de routing **sí** se conserva.
+- **Errores técnicos por etapa**: `clasificacion`, `respuesta` o `desconocida`, con su `trace_id`.
+- **Respuestas completadas**: consultas clasificadas y respondidas sin errores.
+- **Promedios del evaluador**: solo sobre respuestas RAG completadas.
+
 ## 9. Decisiones técnicas
 
 | Tema | Decisión | Por qué |
@@ -151,6 +159,7 @@ Pendiente de la primera ejecución con claves reales (`python -m src.multi_agent
 | Fuera de dominio | Ruta sin LLM ni retriever, con un mensaje fijo | No se gasta API en consultas que no son de ningún área y no hay riesgo de que el modelo invente. |
 | Sin contexto | Si el retriever no devuelve nada, se responde "No encontré…" sin llamar al modelo | Sin evidencia, el modelo no tiene con qué responder: mejor decirlo que inventar. |
 | Evaluador | LLM-juez fuera de la cadena principal, con scores vía Score API | Si el evaluador falla, la respuesta igual llega al usuario. Los scores quedan en la misma traza que la respuesta. |
+| Conexión con Langfuse | `auth_check()` una vez al crear el cliente | El SDK envía trazas y scores en segundo plano y no avisa si fallan; si el host no responde o las claves son inválidas, el sistema sigue sin trazas y lo avisa por consola. |
 | Modelo | `gpt-6-luna` con `reasoning_effort=none` y `text-embedding-3-small` | Son los más baratos; para este caso la potencia no es prioridad. `none` evita tokens de razonamiento ocultos, que se cobran al precio de salida. |
 | Prompts | Archivos `.txt` en `prompts/` | Se pueden ajustar sin tocar el código. |
 | Langfuse | SDK 3.15: span padre con `start_as_current_span` + `CallbackHandler` + `create_score` | Las firmas se verificaron contra la versión instalada. |
