@@ -50,3 +50,11 @@ def test_falla_si_un_departamento_tiene_menos_de_50_chunks(config, tmp_path):
         (carpeta / "corto.md").write_text("# Corto\n\nPoco texto.", encoding="utf-8")
     with pytest.raises(ValueError, match="menos de 50"):
         indexar_todo(config, embeddings=FakeEmbeddings(size=16), carpeta_datos=tmp_path)
+
+
+def test_los_avisos_de_indexacion_van_a_stderr(config, capsys):
+    # stdout queda libre para el JSON de la respuesta (la CLI se puede encadenar).
+    indexar_todo(config, embeddings=FakeEmbeddings(size=16))
+    salida = capsys.readouterr()
+    assert salida.out == ""
+    assert "[indexación] hr" in salida.err

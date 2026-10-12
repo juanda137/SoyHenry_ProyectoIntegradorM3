@@ -149,21 +149,21 @@ def test_respuesta_normal_no_tiene_error(config):
 
 
 def cliente_langfuse_falso(registro):
-    """Imita el cliente de Langfuse 3.x y anota cada llamada en 'registro'."""
+    """Imita el cliente de Langfuse 4.x y anota cada llamada en 'registro'."""
     from contextlib import contextmanager
 
     span = SimpleNamespace(
         trace_id="traza-1",
-        update_trace=lambda **datos: registro.append(("update_trace", datos)),
         update=lambda **datos: registro.append(("update", datos)),
     )
 
     @contextmanager
-    def start_as_current_span(**datos):
+    def start_as_current_observation(**datos):
+        registro.append(("observacion", datos))
         yield span
 
     return SimpleNamespace(
-        start_as_current_span=start_as_current_span,
+        start_as_current_observation=start_as_current_observation,
         create_score=lambda **datos: registro.append(("score", datos)),
         flush=lambda: registro.append(("flush", {})),
     )
@@ -171,13 +171,22 @@ def cliente_langfuse_falso(registro):
 
 @pytest.fixture
 def con_langfuse_falso(monkeypatch):
+    from contextlib import contextmanager
+
     from langchain_core.callbacks import BaseCallbackHandler
 
     import src.multi_agent_system as sistema_mod
 
     registro = []
+
+    @contextmanager
+    def propagate_attributes_falso(**datos):
+        registro.append(("atributos", datos))
+        yield
+
     monkeypatch.setattr(sistema_mod, "obtener_cliente_langfuse", lambda config: cliente_langfuse_falso(registro))
     monkeypatch.setattr(sistema_mod, "crear_handler", lambda config: BaseCallbackHandler())
+    monkeypatch.setattr(sistema_mod, "propagate_attributes", propagate_attributes_falso)
     return registro
 
 
@@ -185,9 +194,29 @@ def test_con_langfuse_una_traza_con_scores_tags_y_flush(config, con_langfuse_fal
     salida = responder("¿vacaciones?", config, sistema=sistema_falso("hr"), llm_evaluador=juez_falso())
     nombres = [nombre for nombre, datos in con_langfuse_falso]
     assert salida["trace_id"] == "traza-1"
+    assert nombres.count("observacion") == 1  # una sola traza raíz por consulta
     assert nombres.count("score") == 4
-    assert next(d for n, d in con_langfuse_falso if n == "update_trace")["tags"] == ["hr"]
+    atributos = next(d for n, d in con_langfuse_falso if n == "atributos")
+    assert atributos["tags"] == ["hr"]
+    assert atributos["metadata"]["confianza"] == "0.8"
+    salida_raiz = next(d for n, d in con_langfuse_falso if n == "update" and "output" in d)
+    assert salida_raiz["output"]["respuesta"] == "resp"
     assert nombres[-1] == "flush"
+
+
+def test_con_langfuse_la_metadata_respeta_el_limite_de_200_caracteres(config, con_langfuse_falso):
+    larga = "x" * 500
+
+    def correr(entrada):
+        return {
+            "consulta": entrada["consulta"],
+            "clasificacion": {"departamento": "hr", "confianza": 0.8, "razon": larga, "error": False},
+            "resultado": {"departamento": "hr", "respuesta": "resp", "fuentes": [], "contexto": "ctx"},
+        }
+
+    responder("¿vacaciones?", config, sistema=RunnableLambda(correr), con_evaluador=False)
+    atributos = next(d for n, d in con_langfuse_falso if n == "atributos")
+    assert all(len(valor) <= 200 for valor in atributos["metadata"].values())
 
 
 def test_con_langfuse_un_error_marca_el_span_y_hace_flush(config, con_langfuse_falso):
@@ -203,4 +232,4 @@ def test_con_langfuse_un_error_marca_el_span_y_hace_flush(config, con_langfuse_f
 
 def test_con_langfuse_un_error_de_respuesta_marca_el_span(config, con_langfuse_falso):
     responder("¿vacaciones?", config, sistema=sistema_con(error_respuesta="timeout"), con_evaluador=False)
-    assert any(n == "update" and d["level"] == "ERROR" for n, d in con_langfuse_falso)
+    assert any(n == "update" and d.get("level") == "ERROR" for n, d in con_langfuse_falso)

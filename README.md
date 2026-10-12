@@ -125,7 +125,7 @@ La respuesta es un JSON con `consulta`, `departamento`, `confianza`, `razon`, `r
 
 ## 7. Observabilidad con Langfuse
 
-Cada llamada a `responder()` abre un span padre (`consulta_soporte`) y le pasa el `CallbackHandler` de Langfuse a LangChain. Así, **una consulta produce una sola traza**, que contiene:
+Cada llamada a `responder()` abre un span raíz (`consulta_soporte`) y le pasa el `CallbackHandler` de Langfuse a LangChain. Así, **una consulta produce una sola traza**, que contiene:
 
 - el span del **orquestador**, con el prompt y la clasificación devuelta;
 - el span del **retriever**, con los chunks recuperados de Chroma;
@@ -162,7 +162,7 @@ Cómo se mide (para no mezclar errores técnicos con errores de routing):
 | Conexión con Langfuse | `auth_check()` una vez al crear el cliente | El SDK envía trazas y scores en segundo plano y no avisa si fallan; si el host no responde o las claves son inválidas, el sistema sigue sin trazas y lo avisa por consola. |
 | Modelo | `gpt-6-luna` con `reasoning_effort=none` y `text-embedding-3-small` | Son los más baratos; para este caso la potencia no es prioridad. `none` evita tokens de razonamiento ocultos, que se cobran al precio de salida. |
 | Prompts | Archivos `.txt` en `prompts/` | Se pueden ajustar sin tocar el código. |
-| Langfuse | SDK 3.15: span padre con `start_as_current_span` + `CallbackHandler` + `create_score` | Las firmas se verificaron contra la versión instalada. |
+| Langfuse | SDK 4.17: span raíz con `start_as_current_observation` + `CallbackHandler` + `propagate_attributes` (tags y metadata) + `create_score` | Langfuse Cloud ya no acepta en la vista de trazas los datos del SDK 3.x para organizaciones creadas desde el 16/09/2026: se comprobó que los spans del SDK 3.15 nunca aparecían y los del 4.17 sí. |
 
 Alternativas descartadas:
 

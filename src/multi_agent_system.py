@@ -9,6 +9,7 @@ import sys
 from pathlib import Path
 
 from langchain_core.runnables import RunnableBranch, RunnableLambda, RunnablePassthrough
+from langfuse import propagate_attributes
 
 from src.agents.finance_agent import crear_finance_agent
 from src.agents.hr_agent import crear_hr_agent
@@ -156,6 +157,16 @@ def procesar(consulta, config, sistema, con_evaluador, llm_evaluador, callbacks,
     return salida
 
 
+def metadata_de_traza(salida):
+    """Metadata para Langfuse: textos de hasta 200 caracteres (límite del SDK)."""
+    return {
+        "confianza": str(salida["confianza"]),
+        "razon": str(salida["razon"])[:200],
+        "error_clasificacion": str(salida["error_clasificacion"]),
+        "etapa_error": str(salida["etapa_error"]),
+    }
+
+
 def responder(consulta, config, sistema=None, con_evaluador=True, llm_evaluador=None, cliente="crear"):
     """Punto de entrada: una consulta -> respuesta (y una traza en Langfuse).
 
@@ -173,7 +184,9 @@ def responder(consulta, config, sistema=None, con_evaluador=True, llm_evaluador=
     else:
         try:
             # Un span "padre": todo lo que pase adentro queda en UNA sola traza.
-            with cliente.start_as_current_span(name="consulta_soporte", input={"consulta": consulta}) as span:
+            with cliente.start_as_current_observation(
+                name="consulta_soporte", as_type="span", input={"consulta": consulta}
+            ) as span:
                 callbacks = [crear_handler(config)]
                 try:
                     salida = procesar(
@@ -184,17 +197,14 @@ def responder(consulta, config, sistema=None, con_evaluador=True, llm_evaluador=
                     # La traza queda marcada como error para encontrarla en Langfuse.
                     span.update(level="ERROR", status_message=str(error))
                     raise
-                # Tags y metadata permiten filtrar en Langfuse (p. ej. baja confianza).
-                span.update_trace(
-                    tags=[salida["departamento"]],
-                    metadata={
-                        "confianza": salida["confianza"],
-                        "razon": salida["razon"],
-                        "error_clasificacion": salida["error_clasificacion"],
-                        "etapa_error": salida["etapa_error"],
-                    },
-                    output={"respuesta": salida["respuesta"], "fuentes": salida["fuentes"]},
-                )
+                # Tags y metadata de la traza: permiten filtrar en Langfuse
+                # (p. ej. por departamento o por baja confianza).
+                with propagate_attributes(
+                    tags=[salida["departamento"]], metadata=metadata_de_traza(salida)
+                ):
+                    pass  # se aplican al span activo (la raíz de la traza)
+                # La salida del span raíz es la salida que muestra la traza.
+                span.update(output={"respuesta": salida["respuesta"], "fuentes": salida["fuentes"]})
                 if salida["etapa_error"] is not None:
                     span.update(level="ERROR", status_message=salida["error"])
         finally:

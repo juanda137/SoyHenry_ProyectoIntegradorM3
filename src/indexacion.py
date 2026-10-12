@@ -6,6 +6,7 @@ Pasos de un RAG antes de poder responder:
     3. convertir cada chunk en un vector (embedding) y guardarlo en Chroma.
 """
 import argparse
+import sys
 from pathlib import Path
 
 from langchain_chroma import Chroma
@@ -102,7 +103,7 @@ def indexar_todo(config, reconstruir=False, embeddings=None, carpeta_datos=RUTA_
             ids = [f"{departamento}-{numero}" for numero in range(len(chunks))]
             vectorstore.add_documents(chunks, ids=ids)
         conteos[departamento] = contar_chunks(vectorstore)
-        print(f"[indexación] {departamento}: {conteos[departamento]} chunks")
+        print(f"[indexación] {departamento}: {conteos[departamento]} chunks", file=sys.stderr)
     return conteos
 
 
