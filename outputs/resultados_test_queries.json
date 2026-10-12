@@ -1,0 +1,321 @@
+{
+  "metricas": {
+    "total": 15,
+    "clasificaciones_validas": 15,
+    "cobertura": 1.0,
+    "aciertos": 15,
+    "acierto_clasificacion": 1.0,
+    "por_departamento": {
+      "hr": {
+        "total": 3,
+        "validas": 3,
+        "aciertos": 3,
+        "acierto": 1.0
+      },
+      "tech": {
+        "total": 5,
+        "validas": 5,
+        "aciertos": 5,
+        "acierto": 1.0
+      },
+      "finance": {
+        "total": 5,
+        "validas": 5,
+        "aciertos": 5,
+        "acierto": 1.0
+      },
+      "fuera_de_dominio": {
+        "total": 2,
+        "validas": 2,
+        "aciertos": 2,
+        "acierto": 1.0
+      }
+    },
+    "mal_enrutadas": [],
+    "errores_tecnicos": {},
+    "detalle_errores": [],
+    "respuestas_completadas": 15,
+    "promedios_evaluador": {
+      "relevance": 9.85,
+      "completeness": 9.46,
+      "accuracy": 9.92,
+      "overall": 9.46
+    },
+    "respuestas_evaluadas": 13
+  },
+  "resultados": [
+    {
+      "id": 1,
+      "consulta": "¿Cuántos días de vacaciones tengo en mi primer año?",
+      "tipo": "clara",
+      "departamento_esperado": "hr",
+      "departamento_obtenido": "hr",
+      "respuesta": "Tienes 15 días hábiles de vacaciones durante tu primer año.",
+      "trace_id": "b11cc395304173392d95d2a944bef305",
+      "evaluacion": {
+        "relevance": 10,
+        "completeness": 10,
+        "accuracy": 10,
+        "overall": 10,
+        "razon": "Responde directamente que corresponden 15 días hábiles en el primer año, tal como indica el contexto. No hacía falta añadir otros detalles para contestar la consulta."
+      },
+      "etapa_error": null,
+      "error": null,
+      "respuesta_completada": true
+    },
+    {
+      "id": 2,
+      "consulta": "¿Cuántos días de licencia por paternidad me corresponden y cómo la pido?",
+      "tipo": "clara",
+      "departamento_esperado": "hr",
+      "departamento_obtenido": "hr",
+      "respuesta": "Te corresponden 10 días hábiles de licencia por paternidad, paga al 100% y sin descuento de tus vacaciones. Puedes tomarla en un bloque o en dos, dentro de los primeros 3 meses desde el nacimiento. Para pedirla, avisa a HR y carga el certificado en Mi NubeGestor, en **Licencias > Nueva licencia**; cuando sea posible, avisa a tu responsable directo con al menos 30 días de anticipación.",
+      "trace_id": "aa7752fa93107b48eac27638ff6c08ec",
+      "evaluacion": {
+        "relevance": 10,
+        "completeness": 9,
+        "accuracy": 10,
+        "overall": 9,
+        "razon": "Responde tanto la cantidad de días como el procedimiento, e incluye el plazo para tomarla, el pago y la recomendación de aviso anticipado. Es precisa; podría aclarar que se admite el certificado de nacimiento o el certificado médico con la fecha probable de parto."
+      },
+      "etapa_error": null,
+      "error": null,
+      "respuesta_completada": true
+    },
+    {
+      "id": 3,
+      "consulta": "¿Cada cuánto se hacen las evaluaciones de desempeño?",
+      "tipo": "clara",
+      "departamento_esperado": "hr",
+      "departamento_obtenido": "hr",
+      "respuesta": "Las evaluaciones de desempeño se hacen dos veces al año, en junio y diciembre.",
+      "trace_id": "9f084948bd96f7368cde07980c6203d9",
+      "evaluacion": {
+        "relevance": 10,
+        "completeness": 10,
+        "accuracy": 10,
+        "overall": 10,
+        "razon": "Responde directamente cada cuánto se hacen las evaluaciones e incluye la frecuencia y los meses indicados en el contexto, sin agregar datos no respaldados."
+      },
+      "etapa_error": null,
+      "error": null,
+      "respuesta_completada": true
+    },
+    {
+      "id": 4,
+      "consulta": "Me bloquearon la cuenta después de varios intentos, ¿cómo la desbloqueo?",
+      "tipo": "clara",
+      "departamento_esperado": "tech",
+      "departamento_obtenido": "tech",
+      "respuesta": "Desbloquéala en acceso.nubegestor.example: elige «No puedo entrar a mi cuenta», escribe tu correo corporativo, confirma tu identidad con la app autenticadora o el código enviado a tu teléfono personal registrado y define una contraseña nueva que cumpla la política. También puedes llamar a la extensión 4000. Si no tienes acceso al segundo factor, llama a la extensión 4000; la mesa de ayuda verificará tu identidad antes de desbloquear la cuenta.",
+      "trace_id": "7c3817b210d58d2b6932af66943badb7",
+      "evaluacion": {
+        "relevance": 10,
+        "completeness": 9,
+        "accuracy": 9,
+        "overall": 9,
+        "razon": "Explica correctamente las opciones y los pasos de desbloqueo, incluido qué hacer si no se tiene acceso al segundo factor. Omite que más de tres bloqueos en una semana se revisan como posible incidente de seguridad, aunque ese dato no es imprescindible para desbloquear la cuenta."
+      },
+      "etapa_error": null,
+      "error": null,
+      "respuesta_completada": true
+    },
+    {
+      "id": 5,
+      "consulta": "¿Cómo configuro la autenticación en dos pasos?",
+      "tipo": "clara",
+      "departamento_esperado": "tech",
+      "departamento_obtenido": "tech",
+      "respuesta": "Instala Google Authenticator o Microsoft Authenticator en tu teléfono. Luego, en Mi NubeGestor, ve a **Seguridad > Autenticación en dos pasos**, elige **Configurar app autenticadora**, escanea el código QR y escribe el código de 6 dígitos de la app para confirmar. Guarda en un lugar seguro los 10 códigos de recuperación; cada uno se puede usar una sola vez. La 2FA se configura el primer día de trabajo junto con Tech al recibir la laptop.",
+      "trace_id": "88ece6d46d6bf094b26417a1b7971f78",
+      "evaluacion": {
+        "relevance": 10,
+        "completeness": 10,
+        "accuracy": 10,
+        "overall": 10,
+        "razon": "La respuesta da todos los pasos de configuración y los detalles relevantes del contexto, incluidos los códigos de recuperación y el momento en que se configura. No añade información sin respaldo."
+      },
+      "etapa_error": null,
+      "error": null,
+      "respuesta_completada": true
+    },
+    {
+      "id": 6,
+      "consulta": "¿Cuál es el límite de solicitudes a la API en el plan Pro?",
+      "tipo": "clara",
+      "departamento_esperado": "tech",
+      "departamento_obtenido": "tech",
+      "respuesta": "El plan Pro tiene un límite de 100 solicitudes por minuto por cuenta de cliente.",
+      "trace_id": "a87f804db2c81f5b8fcffbb6e116d433",
+      "evaluacion": {
+        "relevance": 10,
+        "completeness": 10,
+        "accuracy": 10,
+        "overall": 10,
+        "razon": "Responde directamente con el límite y la unidad de tiempo, e incluye que se aplica por cuenta de cliente, tal como indica el contexto."
+      },
+      "etapa_error": null,
+      "error": null,
+      "respuesta_completada": true
+    },
+    {
+      "id": 7,
+      "consulta": "¿Cuánto me dan de viáticos por día en un viaje nacional?",
+      "tipo": "clara",
+      "departamento_esperado": "finance",
+      "departamento_obtenido": "finance",
+      "respuesta": "Los viáticos para un viaje nacional son USD 60 por día.",
+      "trace_id": "b83922ec81936fafeb559c2fe9213177",
+      "evaluacion": {
+        "relevance": 10,
+        "completeness": 10,
+        "accuracy": 10,
+        "overall": 10,
+        "razon": "Responde directamente el monto diario preguntado, y los USD 60 por día están confirmados en el contexto. No hacía falta incluir otros detalles para esta consulta."
+      },
+      "etapa_error": null,
+      "error": null,
+      "respuesta_completada": true
+    },
+    {
+      "id": 8,
+      "consulta": "¿Cuánto cuesta el plan Empresa por usuario?",
+      "tipo": "clara",
+      "departamento_esperado": "finance",
+      "departamento_obtenido": "finance",
+      "respuesta": "El plan Empresa cuesta USD 25 por usuario al mes, sin incluir impuestos. Con pago anual se aplica un 15% de descuento.",
+      "trace_id": "24739902f0dd5289f7418177f6315a1d",
+      "evaluacion": {
+        "relevance": 10,
+        "completeness": 9,
+        "accuracy": 10,
+        "overall": 9,
+        "razon": "Responde directamente el precio por usuario y añade correctamente el descuento anual y que los impuestos no están incluidos. No especifica el precio anual efectivo, aunque no era imprescindible para contestar la pregunta."
+      },
+      "etapa_error": null,
+      "error": null,
+      "respuesta_completada": true
+    },
+    {
+      "id": 9,
+      "consulta": "¿Necesito una orden de compra para contratar un proveedor de USD 2.000?",
+      "tipo": "clara",
+      "departamento_esperado": "finance",
+      "departamento_obtenido": "finance",
+      "respuesta": "Sí. Para contratar un proveedor por USD 2.000 necesitas una orden de compra, que debe aprobar el gerente del área; además, se recomienda pedir 2 cotizaciones.",
+      "trace_id": "c9bbcf6476d60dbd6820a6d5474800f7",
+      "evaluacion": {
+        "relevance": 10,
+        "completeness": 10,
+        "accuracy": 10,
+        "overall": 10,
+        "razon": "Responde directamente que la orden de compra es obligatoria para USD 2.000, identifica correctamente al gerente del área como aprobador y menciona la recomendación de pedir dos cotizaciones. Todos los datos están respaldados por el contexto."
+      },
+      "etapa_error": null,
+      "error": null,
+      "respuesta_completada": true
+    },
+    {
+      "id": 10,
+      "consulta": "¿Cómo me reintegran los gastos de internet de mi home office?",
+      "tipo": "fronteriza",
+      "departamento_esperado": "finance",
+      "departamento_obtenido": "finance",
+      "respuesta": "Carga la factura de internet en Mi NubeGestor > Gastos > Nuevo gasto, con la categoría «home office», antes del día 5 del mes siguiente; se paga con la nómina de ese mes. El subsidio es de USD 40 mensuales: si las facturas elegibles suman menos, se reintegra ese monto; si suman más, se reintegran USD 40. HR define quién recibe el subsidio y Finance procesa el pago.",
+      "trace_id": "74ec53e677a455be4c122ab0eaa3f9da",
+      "evaluacion": {
+        "relevance": 10,
+        "completeness": 10,
+        "accuracy": 10,
+        "overall": 10,
+        "razon": "Responde directamente cómo solicitar el reintegro e incluye el flujo, el plazo y el pago con nómina, además del monto, los límites y quién define y procesa el subsidio. Todos los datos están respaldados por el contexto."
+      },
+      "etapa_error": null,
+      "error": null,
+      "respuesta_completada": true
+    },
+    {
+      "id": 11,
+      "consulta": "Empiezo el lunes, ¿cuándo me entregan la laptop?",
+      "tipo": "fronteriza",
+      "departamento_esperado": "tech",
+      "departamento_obtenido": "tech",
+      "respuesta": "Tech entrega la laptop configurada el primer día de trabajo, el lunes. Si trabajas 100% en remoto, la recibes por mensajería el día hábil anterior, el viernes.",
+      "trace_id": "7d665f6a77f787370aed2e40ed62c1b1",
+      "evaluacion": {
+        "relevance": 10,
+        "completeness": 9,
+        "accuracy": 10,
+        "overall": 9,
+        "razon": "Responde cuándo se entrega y distingue correctamente el caso remoto; el viernes es el día hábil anterior al lunes. No menciona que la preparación requiere aviso de HR con 5 días hábiles, pero ese detalle no era imprescindible para contestar la pregunta."
+      },
+      "etapa_error": null,
+      "error": null,
+      "respuesta_completada": true
+    },
+    {
+      "id": 12,
+      "consulta": "Hice un curso de capacitación, ¿cómo presento la factura para que me la paguen?",
+      "tipo": "fronteriza",
+      "departamento_esperado": "finance",
+      "departamento_obtenido": "finance",
+      "respuesta": "Solicita al proveedor una factura a nombre de NubeGestor S.A.S., usando el NIT que aparece en Mi NubeGestor > Finanzas > Datos de facturación. Cárgala en Mi NubeGestor > Gastos con la categoría capacitación y adjunta la aprobación de HR recibida por correo. Si la cargas antes del día 5, Finance la paga con la nómina del mes; sin la aprobación de HR no puede procesar el pago.",
+      "trace_id": "396449bd32861b85af36283037c5233d",
+      "evaluacion": {
+        "relevance": 10,
+        "completeness": 9,
+        "accuracy": 10,
+        "overall": 9,
+        "razon": "La respuesta explica correctamente los pasos, la categoría, el requisito de aprobación de HR y el plazo para cobrar por nómina. No menciona la alternativa de pago directo al proveedor, aunque no es necesaria para responder el caso habitual."
+      },
+      "etapa_error": null,
+      "error": null,
+      "respuesta_completada": true
+    },
+    {
+      "id": 13,
+      "consulta": "¿Qué tiempo hará mañana en Bogotá?",
+      "tipo": "fuera_de_dominio",
+      "departamento_esperado": "fuera_de_dominio",
+      "departamento_obtenido": "fuera_de_dominio",
+      "respuesta": "Solo puedo ayudarte con consultas de Recursos Humanos, Soporte de TI o Finanzas de NubeGestor. ¿Puedes reformular tu pregunta sobre alguno de esos temas?",
+      "trace_id": "396f9bf6e97a16d1c69cd5040f7c4948",
+      "evaluacion": null,
+      "etapa_error": null,
+      "error": null,
+      "respuesta_completada": true
+    },
+    {
+      "id": 14,
+      "consulta": "Escríbeme un poema sobre el mar",
+      "tipo": "fuera_de_dominio",
+      "departamento_esperado": "fuera_de_dominio",
+      "departamento_obtenido": "fuera_de_dominio",
+      "respuesta": "Solo puedo ayudarte con consultas de Recursos Humanos, Soporte de TI o Finanzas de NubeGestor. ¿Puedes reformular tu pregunta sobre alguno de esos temas?",
+      "trace_id": "bd03efb68d840659bb0bff7a1a4998f3",
+      "evaluacion": null,
+      "etapa_error": null,
+      "error": null,
+      "respuesta_completada": true
+    },
+    {
+      "id": 15,
+      "consulta": "no puedo entrar",
+      "tipo": "ambigua",
+      "departamento_esperado": "tech",
+      "departamento_obtenido": "tech",
+      "respuesta": "Si tu cuenta se bloqueó tras 5 intentos fallidos, ve a acceso.nubegestor.example, elige «No puedo entrar a mi cuenta» y escribe tu correo corporativo. Confirma tu identidad con la app autenticadora o el código enviado al teléfono registrado y define una contraseña nueva. Si no tienes acceso al segundo factor, llama a la extensión 4000.",
+      "trace_id": "1be41eb6f4fdff42f153fb0fd0e3d188",
+      "evaluacion": {
+        "relevance": 8,
+        "completeness": 8,
+        "accuracy": 10,
+        "overall": 8,
+        "razon": "Ofrece pasos útiles y respaldados para recuperar el acceso, aunque la consulta es ambigua y la respuesta asume que la causa es un bloqueo por intentos fallidos. Podría mencionar también que se puede llamar a la extensión 4000 como alternativa general."
+      },
+      "etapa_error": null,
+      "error": null,
+      "respuesta_completada": true
+    }
+  ]
+}

@@ -12,6 +12,7 @@ Reglas para casos fronterizos:
 - Cobrar o reintegrar dinero (home office, internet, cursos, viajes) es finance, aunque la política la defina hr.
 - Presentar o pagar la factura de un curso de capacitación es finance; pedir aprobación o saber el presupuesto del curso es hr.
 - Recibir la laptop o el equipo, incluso en el primer día o en el onboarding, es tech.
+- Límites de la API, funciones técnicas e integraciones de los planes (Básico, Pro, Empresa) son tech; precios, facturas, descuentos y reembolsos de los planes son finance.
 - "No puedo entrar", "no me deja ingresar" y problemas de acceso sin más detalle son tech.
 - Si la consulta mezcla dos departamentos, elige el de la acción principal que pide el usuario.
 

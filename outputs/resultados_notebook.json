@@ -1,0 +1,238 @@
+{
+  "metricas": {
+    "total": 15,
+    "clasificaciones_validas": 15,
+    "cobertura": 1.0,
+    "aciertos": 15,
+    "acierto_clasificacion": 1.0,
+    "por_departamento": {
+      "hr": {
+        "total": 3,
+        "validas": 3,
+        "aciertos": 3,
+        "acierto": 1.0
+      },
+      "tech": {
+        "total": 5,
+        "validas": 5,
+        "aciertos": 5,
+        "acierto": 1.0
+      },
+      "finance": {
+        "total": 5,
+        "validas": 5,
+        "aciertos": 5,
+        "acierto": 1.0
+      },
+      "fuera_de_dominio": {
+        "total": 2,
+        "validas": 2,
+        "aciertos": 2,
+        "acierto": 1.0
+      }
+    },
+    "mal_enrutadas": [],
+    "errores_tecnicos": {},
+    "detalle_errores": [],
+    "respuestas_completadas": 15,
+    "promedios_evaluador": {},
+    "respuestas_evaluadas": 0
+  },
+  "resultados": [
+    {
+      "id": 1,
+      "consulta": "¿Cuántos días de vacaciones tengo en mi primer año?",
+      "tipo": "clara",
+      "departamento_esperado": "hr",
+      "departamento_obtenido": "hr",
+      "respuesta": "En tu primer año tienes 15 días hábiles de vacaciones.",
+      "trace_id": "ffb25bcdd14c60fba29bcf69302c290d",
+      "evaluacion": null,
+      "etapa_error": null,
+      "error": null,
+      "respuesta_completada": true
+    },
+    {
+      "id": 2,
+      "consulta": "¿Cuántos días de licencia por paternidad me corresponden y cómo la pido?",
+      "tipo": "clara",
+      "departamento_esperado": "hr",
+      "departamento_obtenido": "hr",
+      "respuesta": "Te corresponden 10 días hábiles de licencia paga al 100% del salario, que no se descuentan de tus vacaciones. Puedes tomarla en un solo bloque o en dos bloques dentro de los primeros 3 meses desde el nacimiento. Para pedirla, avisa a HR y carga el certificado correspondiente en Mi NubeGestor, en **Licencias > Nueva licencia**; si es posible, avisa a tu responsable directo con al menos 30 días de anticipación.",
+      "trace_id": "1bfd895f28743b1970e5afa1560ced9b",
+      "evaluacion": null,
+      "etapa_error": null,
+      "error": null,
+      "respuesta_completada": true
+    },
+    {
+      "id": 3,
+      "consulta": "¿Cada cuánto se hacen las evaluaciones de desempeño?",
+      "tipo": "clara",
+      "departamento_esperado": "hr",
+      "departamento_obtenido": "hr",
+      "respuesta": "Las evaluaciones de desempeño se hacen dos veces al año: en junio y en diciembre.",
+      "trace_id": "7a547f1d2dc5b9efe339e01dbdd130c9",
+      "evaluacion": null,
+      "etapa_error": null,
+      "error": null,
+      "respuesta_completada": true
+    },
+    {
+      "id": 4,
+      "consulta": "Me bloquearon la cuenta después de varios intentos, ¿cómo la desbloqueo?",
+      "tipo": "clara",
+      "departamento_esperado": "tech",
+      "departamento_obtenido": "tech",
+      "respuesta": "Puedes desbloquearla en acceso.nubegestor.example: selecciona «No puedo entrar a mi cuenta», escribe tu correo corporativo, confirma tu identidad con la app autenticadora o el código enviado al teléfono personal registrado y define una contraseña nueva que cumpla la política. También puedes llamar a la extensión 4000. Si no tienes acceso al segundo factor, llama a la extensión 4000; la mesa de ayuda verificará tu identidad antes de desbloquearla.",
+      "trace_id": "77be54b6a12021dd3d8bb09dd4b74e58",
+      "evaluacion": null,
+      "etapa_error": null,
+      "error": null,
+      "respuesta_completada": true
+    },
+    {
+      "id": 5,
+      "consulta": "¿Cómo configuro la autenticación en dos pasos?",
+      "tipo": "clara",
+      "departamento_esperado": "tech",
+      "departamento_obtenido": "tech",
+      "respuesta": "Instala Google Authenticator o Microsoft Authenticator en tu teléfono. En Mi NubeGestor, ve a **Seguridad > Autenticación en dos pasos**, elige **“Configurar app autenticadora”** y escanea el código QR. Ingresa el código de 6 dígitos para confirmar y guarda en un lugar seguro los 10 códigos de recuperación; cada uno se usa una sola vez. La configuración se realiza el primer día de trabajo junto con Tech al recibir la laptop.",
+      "trace_id": "0b234a22ff6c8be087a4ce1e257fb864",
+      "evaluacion": null,
+      "etapa_error": null,
+      "error": null,
+      "respuesta_completada": true
+    },
+    {
+      "id": 6,
+      "consulta": "¿Cuál es el límite de solicitudes a la API en el plan Pro?",
+      "tipo": "clara",
+      "departamento_esperado": "tech",
+      "departamento_obtenido": "tech",
+      "respuesta": "El límite en el plan Pro es de 100 solicitudes por minuto por cuenta de cliente.",
+      "trace_id": "89bfb31b780d3c68d42937632d3112c2",
+      "evaluacion": null,
+      "etapa_error": null,
+      "error": null,
+      "respuesta_completada": true
+    },
+    {
+      "id": 7,
+      "consulta": "¿Cuánto me dan de viáticos por día en un viaje nacional?",
+      "tipo": "clara",
+      "departamento_esperado": "finance",
+      "departamento_obtenido": "finance",
+      "respuesta": "Los viáticos para un viaje nacional son USD 60 por día.",
+      "trace_id": "f5ebc3cfc8f2fd3ba476285d4021f81a",
+      "evaluacion": null,
+      "etapa_error": null,
+      "error": null,
+      "respuesta_completada": true
+    },
+    {
+      "id": 8,
+      "consulta": "¿Cuánto cuesta el plan Empresa por usuario?",
+      "tipo": "clara",
+      "departamento_esperado": "finance",
+      "departamento_obtenido": "finance",
+      "respuesta": "El plan Empresa cuesta USD 25 por usuario al mes, sin incluir impuestos. Con pago anual se aplica un descuento del 15%.",
+      "trace_id": "d8166021a23f69e35d927d7199b1b590",
+      "evaluacion": null,
+      "etapa_error": null,
+      "error": null,
+      "respuesta_completada": true
+    },
+    {
+      "id": 9,
+      "consulta": "¿Necesito una orden de compra para contratar un proveedor de USD 2.000?",
+      "tipo": "clara",
+      "departamento_esperado": "finance",
+      "departamento_obtenido": "finance",
+      "respuesta": "Sí. Para una compra de USD 2.000 necesitas una orden de compra aprobada por el gerente de tu área. Se crea en Mi NubeGestor > Finanzas > Órdenes de compra > Nueva; adjunta la cotización del proveedor antes de enviarla a aprobación.",
+      "trace_id": "b82471070a2c9abacf5c7fdb05775c46",
+      "evaluacion": null,
+      "etapa_error": null,
+      "error": null,
+      "respuesta_completada": true
+    },
+    {
+      "id": 10,
+      "consulta": "¿Cómo me reintegran los gastos de internet de mi home office?",
+      "tipo": "fronteriza",
+      "departamento_esperado": "finance",
+      "departamento_obtenido": "finance",
+      "respuesta": "Cargá la factura de internet en Mi NubeGestor > Gastos > Nuevo gasto, con la categoría home office, antes del día 5 del mes siguiente. El reintegro se paga con la nómina de ese mes; el subsidio es de hasta USD 40 por mes, limitado al total de las facturas cargadas.",
+      "trace_id": "c4820d92f9597a1553cf9f1312cab3d2",
+      "evaluacion": null,
+      "etapa_error": null,
+      "error": null,
+      "respuesta_completada": true
+    },
+    {
+      "id": 11,
+      "consulta": "Empiezo el lunes, ¿cuándo me entregan la laptop?",
+      "tipo": "fronteriza",
+      "departamento_esperado": "tech",
+      "departamento_obtenido": "tech",
+      "respuesta": "Tech entrega la laptop configurada el primer día de trabajo, el lunes. Si trabajas 100% en remoto, la recibes por mensajería el día hábil anterior, es decir, el viernes.",
+      "trace_id": "fa1bb64d92828e4de528739c8c60d8de",
+      "evaluacion": null,
+      "etapa_error": null,
+      "error": null,
+      "respuesta_completada": true
+    },
+    {
+      "id": 12,
+      "consulta": "Hice un curso de capacitación, ¿cómo presento la factura para que me la paguen?",
+      "tipo": "fronteriza",
+      "departamento_esperado": "finance",
+      "departamento_obtenido": "finance",
+      "respuesta": "Solicita al proveedor una factura a nombre de NubeGestor S.A.S., usando el número de identificación tributaria que encuentras en Mi NubeGestor > Finanzas > Datos de facturación. Cárgala en Mi NubeGestor > Gastos con la categoría capacitación y adjunta la aprobación de HR recibida por correo; sin esa aprobación, Finanzas no puede procesar el pago. Si la cargas antes del día 5, Finance la paga con la nómina del mes.",
+      "trace_id": "c81032dc48b7af23ca7eca3530ea3367",
+      "evaluacion": null,
+      "etapa_error": null,
+      "error": null,
+      "respuesta_completada": true
+    },
+    {
+      "id": 13,
+      "consulta": "¿Qué tiempo hará mañana en Bogotá?",
+      "tipo": "fuera_de_dominio",
+      "departamento_esperado": "fuera_de_dominio",
+      "departamento_obtenido": "fuera_de_dominio",
+      "respuesta": "Solo puedo ayudarte con consultas de Recursos Humanos, Soporte de TI o Finanzas de NubeGestor. ¿Puedes reformular tu pregunta sobre alguno de esos temas?",
+      "trace_id": "5fb8fd7b0b1af44235a69784c4653e70",
+      "evaluacion": null,
+      "etapa_error": null,
+      "error": null,
+      "respuesta_completada": true
+    },
+    {
+      "id": 14,
+      "consulta": "Escríbeme un poema sobre el mar",
+      "tipo": "fuera_de_dominio",
+      "departamento_esperado": "fuera_de_dominio",
+      "departamento_obtenido": "fuera_de_dominio",
+      "respuesta": "Solo puedo ayudarte con consultas de Recursos Humanos, Soporte de TI o Finanzas de NubeGestor. ¿Puedes reformular tu pregunta sobre alguno de esos temas?",
+      "trace_id": "8a8fb498e926529f78e99fba07de9c98",
+      "evaluacion": null,
+      "etapa_error": null,
+      "error": null,
+      "respuesta_completada": true
+    },
+    {
+      "id": 15,
+      "consulta": "no puedo entrar",
+      "tipo": "ambigua",
+      "departamento_esperado": "tech",
+      "departamento_obtenido": "tech",
+      "respuesta": "Si tu cuenta está bloqueada por 5 intentos fallidos, ve a acceso.nubegestor.example y elige «No puedo entrar a mi cuenta». Escribe tu correo corporativo, confirma tu identidad con el segundo factor y define una contraseña nueva. También puedes llamar a la extensión 4000.",
+      "trace_id": "3ce305e0e887f38c3e2d648dccfd6864",
+      "evaluacion": null,
+      "etapa_error": null,
+      "error": null,
+      "respuesta_completada": true
+    }
+  ]
+}

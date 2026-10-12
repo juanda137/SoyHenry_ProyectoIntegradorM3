@@ -136,7 +136,20 @@ Cada traza lleva como **tag** el departamento elegido y como **metadata** la con
 
 ## 8. Resultados medidos
 
-Pendiente de la primera ejecución con claves reales (`python -m src.multi_agent_system --evaluar-queries`). Los resultados quedan en `outputs/resultados_test_queries.json`.
+Ejecución real del 12/10/2026 con `gpt-6-luna`, `text-embedding-3-small` y Langfuse Cloud (`python -m src.multi_agent_system --evaluar-queries`). Detalle completo en `outputs/resultados_test_queries.json`.
+
+| Métrica | Primera medición | Después del ajuste del prompt |
+|---|---|---|
+| Clasificaciones válidas (cobertura) | 15/15 (100 %) | 15/15 (100 %) |
+| Acierto de clasificación | 14/15 (93,3 %) | **15/15 (100 %)** |
+| hr / tech / finance / fuera de dominio | 3/3 · 4/5 · 5/5 · 2/2 | 3/3 · 5/5 · 5/5 · 2/2 |
+| Errores técnicos | ninguno | ninguno |
+| Respuestas completadas | 15/15 | 15/15 |
+| Evaluador: relevance / completeness / accuracy / overall | 9,83 / 9,67 / 10,0 / 9,67 (12 respuestas) | 9,85 / 9,46 / 9,92 / 9,46 (13 respuestas) |
+
+**Qué falló y qué se cambió.** En la primera medición, la consulta 6 ("¿Cuál es el límite de solicitudes a la API en el plan Pro?") se enrutó a `fuera_de_dominio`. Repetida tres veces, el orquestador la mandó una vez a `fuera_de_dominio` y dos a `finance`: al leer "plan Pro" la asociaba a precios. Al prompt le faltaba una regla que la documentación ya establece ("Límites de la API y funciones técnicas de cada plan: Tech", en `facturacion_y_planes.md`). Se agregó esa regla a `prompts/orquestador.txt` y se volvió a medir. El resultado de la primera medición queda en `outputs/resultados_test_queries_v1.json`.
+
+**Cuidado al leer estos números.** Son 15 consultas: un 100 % aquí no garantiza el mismo acierto con consultas reales. El evaluador usa el mismo modelo que genera las respuestas, así que sus notas altas pueden ser indulgentes (ver limitaciones). El modelo no es determinista: otra corrida puede variar en una o dos consultas.
 
 Cómo se mide (para no mezclar errores técnicos con errores de routing):
 
