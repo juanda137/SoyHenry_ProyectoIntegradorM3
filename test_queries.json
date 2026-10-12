@@ -1,0 +1,17 @@
+[
+  {"id": 1, "consulta": "¿Cuántos días de vacaciones tengo en mi primer año?", "departamento_esperado": "hr", "tipo": "clara"},
+  {"id": 2, "consulta": "¿Cuántos días de licencia por paternidad me corresponden y cómo la pido?", "departamento_esperado": "hr", "tipo": "clara"},
+  {"id": 3, "consulta": "¿Cada cuánto se hacen las evaluaciones de desempeño?", "departamento_esperado": "hr", "tipo": "clara"},
+  {"id": 4, "consulta": "Me bloquearon la cuenta después de varios intentos, ¿cómo la desbloqueo?", "departamento_esperado": "tech", "tipo": "clara"},
+  {"id": 5, "consulta": "¿Cómo configuro la autenticación en dos pasos?", "departamento_esperado": "tech", "tipo": "clara"},
+  {"id": 6, "consulta": "¿Cuál es el límite de solicitudes a la API en el plan Pro?", "departamento_esperado": "tech", "tipo": "clara"},
+  {"id": 7, "consulta": "¿Cuánto me dan de viáticos por día en un viaje nacional?", "departamento_esperado": "finance", "tipo": "clara"},
+  {"id": 8, "consulta": "¿Cuánto cuesta el plan Empresa por usuario?", "departamento_esperado": "finance", "tipo": "clara"},
+  {"id": 9, "consulta": "¿Necesito una orden de compra para contratar un proveedor de USD 2.000?", "departamento_esperado": "finance", "tipo": "clara"},
+  {"id": 10, "consulta": "¿Cómo me reintegran los gastos de internet de mi home office?", "departamento_esperado": "finance", "tipo": "fronteriza"},
+  {"id": 11, "consulta": "Empiezo el lunes, ¿cuándo me entregan la laptop?", "departamento_esperado": "tech", "tipo": "fronteriza"},
+  {"id": 12, "consulta": "Hice un curso de capacitación, ¿cómo presento la factura para que me la paguen?", "departamento_esperado": "finance", "tipo": "fronteriza"},
+  {"id": 13, "consulta": "¿Qué tiempo hará mañana en Bogotá?", "departamento_esperado": "fuera_de_dominio", "tipo": "fuera_de_dominio"},
+  {"id": 14, "consulta": "Escríbeme un poema sobre el mar", "departamento_esperado": "fuera_de_dominio", "tipo": "fuera_de_dominio"},
+  {"id": 15, "consulta": "no puedo entrar", "departamento_esperado": "tech", "tipo": "ambigua"}
+]
